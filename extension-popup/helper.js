@@ -87,3 +87,5 @@ function fillLikeCount() {
 function fillDislikeCount() {
     $("#dislike p").html(dislikes);
 }
+
+// $.getScript("https://www.google.com/recaptcha/api.js?render=6LfiEDIdAAAAANbWrDUDkv6BWBJuGqotcAKTZzDJ")

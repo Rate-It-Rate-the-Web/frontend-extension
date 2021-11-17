@@ -1,17 +1,12 @@
-function buildLoginHtml(){
+function buildLoginHtml() {
     return `
-    <div class="login-container">
-        <button class="login-button" id="login-button">Verify</button>
-        <p>This site does use  Google's reCAPTCHA, Version 3 which runs under the <a href="https://www.google.com/policies/privacy/">Privacy Policy</a> and the <a href="https://www.google.com/policies/terms/">Terms of Service</a></p>
+    <div>
+    <h1>Login via Google</h1>
+    <a href="/login/login.html"  target="_blank">
+    <img src="./images/btn_google_signin_dark_normal_web@2x.png" alt="Google Logo" style="width: 250px;">
+    </a>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script>
-    $("#dislikeButton").click(function () {
-    });
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
+   
 
-    `
+    `;
 }

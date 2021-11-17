@@ -1,13 +1,14 @@
-// chrome.storage.sync.get('loggedIn', (loggedIn) => {
-//     if (typeof loggedIn == "object") {
-//         $("body").html(buildLoginHtml());
-//     }
-//     else {
-//         if (loggedIn == false){
-//             $("body").html(buildLoginHtml());
-//         }
-//     }
-// });
+chrome.storage.sync.get("loggedIn", async (loggedIn) => {
+    console.log(typeof loggedIn)
+    if (typeof loggedIn == "object") {
+        $("body").html(buildLoginHtml());
+        console.log("ffdad");
+    } else {
+        if (loggedIn == false) {
+            $("body").html(buildLoginHtml());
+        }
+    }
+});
 
 const currentUrl = chrome.tabs.query(
     { active: true, lastFocusedWindow: true },
