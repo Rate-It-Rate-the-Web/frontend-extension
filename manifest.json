@@ -2,8 +2,11 @@
     "name": "Rate It!",
     "description": "Rate and discuss every Website you can find.",
     "version": "1.0",
+    "background": {
+      "service_worker": "background.js"
+    },
     "manifest_version": 3,
-      "permissions": ["storage", "activeTab", "scripting", "tabs"],
+      "permissions": ["storage", "activeTab", "scripting", "tabs", "identity"],
       "action": {
         "default_popup": "extension-popup/index.html",
         "default_icon": {
