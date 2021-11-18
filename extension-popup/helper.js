@@ -1,3 +1,14 @@
+function verify(token_id){
+    $.ajax({
+        url: "https://httpbin.org/verify",
+        type: "post",
+        dataType: "json",
+        data: {
+            token_id: token_id,
+        },
+    });
+}
+
 function sendLike() {
     $.ajax({
         url: "https://httpbin.org/post/like",

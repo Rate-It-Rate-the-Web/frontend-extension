@@ -25,17 +25,7 @@ function oauthLogin() {
             const url = new URL(responseUrl);
             const urlParams = new URLSearchParams(url.hash.slice(1));
             const params = Object.fromEntries(urlParams.entries()); // access_token, expires_in
-            fetch(
-                `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`,
-                {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                }
-            )
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(JSON.stringify(data));
-                });
+            verify(params.access_token);
         }
     );
 }
