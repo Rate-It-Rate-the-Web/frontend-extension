@@ -7,6 +7,7 @@
     },
     "manifest_version": 3,
       "permissions": ["storage", "activeTab", "scripting", "tabs", "identity"],
+      "host_permissions":["http://127.0.0.1/"],
       "action": {
         "default_popup": "extension-popup/index.html",
         "default_icon": {

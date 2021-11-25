@@ -1,6 +1,6 @@
 function verify(token_id){
     $.ajax({
-        url: "https://httpbin.org/verify",
+        url: "http://127.0.0.1:5000/verify",
         type: "post",
         dataType: "json",
         data: {
@@ -11,43 +11,35 @@ function verify(token_id){
 
 function sendLike() {
     $.ajax({
-        url: "https://httpbin.org/post/like",
+        url: "http://127.0.0.1:5000/post/rating",
         type: "post",
         dataType: "json",
         data: {
             url: currentUrl,
+            rating: 1,
         },
     });
 }
 function sendDislike() {
     $.ajax({
-        url: "https://httpbin.org/post/dislike",
+        url: "http://127.0.0.1:5000/post/rating",
         type: "post",
         dataType: "json",
         data: {
             url: currentUrl,
+            rating: -1,
         },
     });
 }
-async function getLikeCount() {
+async function getRating(url) {
     return (await $.ajax({
-        url: "https://httpbin.org/get/likes",
+        url: "http://127.0.0.1:5000/get/rating",
         type: "get",
         data: {
-            url: currentUrl,
+            url: url,
         },
         error: function (xhr) {},
-    })).args.likes
-}
-async function getDislikeCount() {
-    return (await $.ajax({
-        url: "https://httpbin.org/get/dislikes",
-        type: "get",
-        data: {
-            url: currentUrl,
-        },
-        error: function (xhr) {},
-    })).args.dislikes
+    }))
 }
 
 function onLike() {
