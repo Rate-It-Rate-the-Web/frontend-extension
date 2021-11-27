@@ -23,7 +23,7 @@ function oauthLogin() {
         client_id: client_id,
         redirect_uri: redirect_url,
         response_type: "token",
-        scope: "openid"
+        scope: "openid profile"
     };
 
     const url = new URLSearchParams(Object.entries(auth_params));
