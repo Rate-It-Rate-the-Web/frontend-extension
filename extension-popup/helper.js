@@ -6,6 +6,14 @@ function verify(token){
             data: JSON.stringify({token: token})
     });
 }
+function login(token){
+    $.ajax({
+            url: "http://127.0.0.1:5000/login",
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({token: token})
+    });
+}
 function sendRating(rating) {
     $.ajax({
         url: "http://127.0.0.1:5000/post/rating",
