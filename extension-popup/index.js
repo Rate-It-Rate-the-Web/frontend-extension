@@ -1,20 +1,20 @@
-// chrome.storage.sync.get("loggedIn", async (loggedIn) => {
-//   if (typeof loggedIn == "object") {
-//     $("body").html(buildLoginHtml());
-//     $("#googleLogin").click(function () {
-//       chrome.runtime.sendMessage({ msg: "login" });
-//       console.log("login");
-//     });
-//   } else {
-//     if (loggedIn == false) {
-//       $("body").html(buildLoginHtml());
-//       $("#googleLogin").click(function () {
-//         chrome.runtime.sendMessage({ msg: "login" });
-//         console.log("login");
-//       });
-//     }
-//   }
-// });
+chrome.storage.sync.get("loggedIn", async (loggedIn) => {
+  if (typeof loggedIn == "object") {
+    $("body").html(buildLoginHtml());
+    $("#googleLogin").click(function () {
+      chrome.runtime.sendMessage({ msg: "login" });
+      console.log("login");
+    });
+  } else {
+    if (loggedIn == false) {
+      $("body").html(buildLoginHtml());
+      $("#googleLogin").click(function () {
+        chrome.runtime.sendMessage({ msg: "login" });
+        console.log("login");
+      });
+    }
+  }
+});
 
 const currentUrl = "https://www.google.com/1234"/*chrome.tabs.query(
   { active: true, currentWindow: true },

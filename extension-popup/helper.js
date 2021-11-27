@@ -1,34 +1,17 @@
-function verify(token_id){
+function verify(token){
     $.ajax({
-        url: "http://127.0.0.1:5000/verify",
-        type: "post",
-        dataType: "json",
-        data: {
-            token_id: token_id,
-        },
+            url: "http://127.0.0.1:5000/verify",
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({token: token})
     });
 }
-
-function sendLike() {
+function sendRating(rating) {
     $.ajax({
         url: "http://127.0.0.1:5000/post/rating",
         type: "post",
-        dataType: "json",
-        data: {
-            url: currentUrl,
-            rating: 1,
-        },
-    });
-}
-function sendDislike() {
-    $.ajax({
-        url: "http://127.0.0.1:5000/post/rating",
-        type: "post",
-        dataType: "json",
-        data: {
-            url: currentUrl,
-            rating: -1,
-        },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({url: currentUrl, rating: rating})
     });
 }
 async function getRating(url) {
@@ -44,8 +27,8 @@ async function getRating(url) {
 
 function onLike() {
     if (liked == false) {
-        sendLike();
         liked = true;
+        sendRating(1);
         if (disliked == true) {
             disliked = false;
             $("#dislike .filledActive").removeClass("filledActive");
@@ -57,6 +40,7 @@ function onLike() {
         fillLikeCount();
     } else {
         liked = false;
+        sendRating(0)
         $("#like .filledActive").removeClass("filledActive");
         likes--;
         fillLikeCount();
@@ -65,7 +49,7 @@ function onLike() {
 
 function onDislike() {
     if (disliked == false) {
-        sendDislike();
+        sendRating(-1);
         disliked = true;
         if (liked == true) {
             liked = false;
@@ -78,6 +62,7 @@ function onDislike() {
         fillDislikeCount();
     } else {
         disliked = false;
+        sendRating(0)
         $("#dislike .filledActive").removeClass("filledActive");
         dislikes--;
         fillDislikeCount();
