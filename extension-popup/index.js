@@ -74,5 +74,21 @@ chrome.storage.sync.get("loggedIn", async (loggedIn) => {
           });
           console.log("login");
       });
+      
+  } else if (loggedIn.loggedIn == "inProgress") {
+    chrome.runtime.sendMessage({ msg: "login" }, function (response) {
+      if (response == "success") {
+          $("body .wrapper").html(buildIndexHtml());
+          getAndFillRating();
+          $("#likeButton").click(function () {
+            onLike();
+        });
+        
+        $("#dislikeButton").click(function () {
+            onDislike();
+        });
+      }
+  });
+
   }
 });

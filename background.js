@@ -33,7 +33,7 @@ function oauthLogin() {
     const url = new URLSearchParams(Object.entries(auth_params));
     url.toString();
     auth_url += url;
-
+    chrome.storage.sync.set({'loggedIn': "inProgress"})
     return chrome.identity.launchWebAuthFlow(
         {
             interactive: true,
