@@ -1,11 +1,10 @@
-
-
-const currentUrl = "https://www.google.com/abc"; /*chrome.tabs.query(
+let currentUrl="";
+chrome.tabs.query(
   { active: true, currentWindow: true },
   (tabs) => {
-    let url = tabs[0].url;
+    currentUrl = tabs[0].url;
   }
-);*/
+);
 console.log(currentUrl);
 let likes = 0;
 let dislikes = 0;
