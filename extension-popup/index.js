@@ -38,7 +38,7 @@ async function getAndFillRating() {
 }
 getAndFillRating();
 chrome.storage.sync.get("loggedIn", async (loggedIn) => {
-  if (typeof loggedIn.loggedIn == undefined) {
+  if (loggedIn.loggedIn == undefined) {
       $("body .wrapper").html(buildLoginHtml());
       $("#googleLogin").click(function () {
           chrome.runtime.sendMessage({ msg: "login" }, function (response) {
