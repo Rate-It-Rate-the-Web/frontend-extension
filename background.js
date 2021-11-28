@@ -8,8 +8,12 @@ function login(token){
     }).then((response) => {
         return response.text()
     }).then((text) => {
-        console.log(text);        
-        });
+        console.log(text);
+        if (text=="success"){
+            chrome.storage.sync.set({'loggedIn': true}, function() {
+                console.log("logged in");
+            });
+        }});
 }
 
 
@@ -47,4 +51,5 @@ function oauthLogin() {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(oauthLogin());
+    sendResponse("success")
 });
