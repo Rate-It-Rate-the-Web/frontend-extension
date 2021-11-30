@@ -1,4 +1,4 @@
-const server="https://rateit.lennardwalter.com/"
+const server="https://rateit.timon-gaertner.ga/"
 function login(token){
     fetch(server+"login", {
             method: "POST",
