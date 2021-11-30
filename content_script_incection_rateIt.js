@@ -12,7 +12,6 @@ function sendRating(rating) {
     });
 }
 async function fillDislikes(htmlDislikeSelector) {
-    currentUrl = currentUrl[0].url;
     rating = await $.ajax({
         url: server+"get/rating",
         type: "get",
@@ -32,7 +31,6 @@ async function fillDislikes(htmlDislikeSelector) {
     htmlDislikeSelector.text(dislikes);
 }
 async function fillLikes(htmlLikeSelector) {
-    currentUrl = currentUrl[0].url;
     rating = await $.ajax({
         url: server+"get/rating",
         type: "get",
