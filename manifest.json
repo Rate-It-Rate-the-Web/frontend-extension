@@ -11,7 +11,7 @@
         "matches": ["https://www.youtube.com/watch*"],
         "js": ["jquery.js", "youtubeVideo.js"]
     }],
-    "page_action": {
+    "browser_action": {
         "default_popup": "extension-popup/index.html",
         "default_icon": {
             "16": "/logos/rateItLogo16.png",
