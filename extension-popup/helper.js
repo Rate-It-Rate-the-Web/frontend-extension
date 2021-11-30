@@ -1,6 +1,6 @@
 function verify(token){
     $.ajax({
-            url: "http://127.0.0.1:5000/verify",
+            url: server+"verify",
             type: "post",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({token: token})
@@ -8,7 +8,7 @@ function verify(token){
 }
 function login(token){
     $.ajax({
-            url: "http://127.0.0.1:5000/login",
+            url: server+"login",
             type: "post",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({token: token})
@@ -16,7 +16,7 @@ function login(token){
 }
 function sendRating(rating) {
     $.ajax({
-        url: "http://127.0.0.1:5000/post/rating",
+        url: server+"post/rating",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({url: currentUrl, rating: rating})
@@ -24,7 +24,7 @@ function sendRating(rating) {
 }
 async function getRating(url) {
     return (await $.ajax({
-        url: "http://127.0.0.1:5000/get/rating",
+        url: server+"get/rating",
         type: "get",
         data: {
             url: url,

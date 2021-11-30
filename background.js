@@ -1,5 +1,6 @@
+const server="https://rateit.lennardwalter.com/"
 function login(token){
-    fetch("http://127.0.0.1:5000/login", {
+    fetch(server+"login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

@@ -1,3 +1,4 @@
+const server = "https://rateit.lennardwalter.com/";
 let currentUrl = "";
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   currentUrl = tabs[0].url;
