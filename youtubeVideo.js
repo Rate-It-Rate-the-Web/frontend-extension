@@ -1,3 +1,3 @@
-fillDislikes($('ytd-toggle-button-renderer.style-text[is-icon-button] #text.ytd-toggle-button-renderer:nth-of-type(1)').eq(1))
-assignDislikeButton($('yt-simple-endpoint style-scope ytd-toggle-button-renderer').eq(1))
-assignLikeButton($('yt-simple-endpoint style-scope ytd-toggle-button-renderer').eq(0))
+fillDislikes($('ytd-toggle-button-renderer a yt-formatted-string').eq(1))
+assignDisslikeButton($('ytd-toggle-button-renderer .yt-simple-endpoint').eq(1))
+assignLikeButton($('ytd-toggle-button-renderer .yt-simple-endpoint').eq(0))
