@@ -1,11 +1,11 @@
 let currentUrl = (window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search).toLowerCase();
-
+const server = "https://rateit.timon-gaertner.ga/"
 let liked = false;
 let disliked = false;
 
 function sendRating(rating) {
     $.ajax({
-        url: "http://127.0.0.1:5000/post/rating",
+        url: server+"post/rating",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({url: currentUrl, rating: rating})
@@ -15,7 +15,7 @@ function sendRating(rating) {
 async function fillDislikes() {
     currentUrl = currentUrl[0].url;
     rating = await $.ajax({
-        url: "http://127.0.0.1:5000/get/rating",
+        url: server+"get/rating",
         type: "get",
         data: {
             url: currentUrl,
