@@ -4,7 +4,7 @@ let liked = false;
 let disliked = false;
 
 function sendRating(rating) {
-    chrome.runtime.sendMessage({action: "sendRating", url: currentUrl, rating: rating});
+    browser.runtime.sendMessage({action: "sendRating", url: currentUrl, rating: rating});
 }
 async function fillDislikes(htmlDislikeSelector) {
     rating = await $.ajax({
