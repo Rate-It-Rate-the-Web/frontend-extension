@@ -49,8 +49,28 @@ function oauthLogin() {
         }
     );
 }
+function sendRating(rating, currentUrl) {
+    fetch(server+"post/rating", {
+        method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({url: currentUrl, rating: rating})
+    })
+}
+
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    console.log(oauthLogin());
+    if (request.action == "oauthLogin") {
+            oauthLogin()
+    }
+    else if (request.action == "sendRating"){
+        sendRating(request.rating, request.url)
+    }
     sendResponse("success")
 });
+
+
+
+
+

@@ -24,8 +24,8 @@ function sendRating(rating) {
             chrome.storage.sync.remove("loggedIn");
             $("body .wrapper").html(buildLoginHtml());
             $("#googleLogin").click(function () {
-                browser.runtime.sendMessage(
-                    { msg: "login" },
+                chrome.runtime.sendMessage(
+                    { action: "oauthLogin" },
                     function (response) {
                         if (response == "success") {
                             $("body .wrapper").html(buildIndexHtml());
