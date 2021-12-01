@@ -4,12 +4,7 @@ let liked = false;
 let disliked = false;
 
 function sendRating(rating) {
-    $.ajax({
-        url: server+"post/rating",
-        type: "post",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({url: currentUrl, rating: rating})
-    });
+    chrome.runtime.sendMessage({action: "sendRating", url: currentUrl, rating: rating});
 }
 async function fillDislikes(htmlDislikeSelector) {
     rating = await $.ajax({

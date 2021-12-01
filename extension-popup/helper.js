@@ -25,7 +25,7 @@ function sendRating(rating) {
             $("body .wrapper").html(buildLoginHtml());
             $("#googleLogin").click(function () {
                 chrome.runtime.sendMessage(
-                    { msg: "login" },
+                    { action: "oauthLogin" },
                     function (response) {
                         if (response == "success") {
                             $("body .wrapper").html(buildIndexHtml());
