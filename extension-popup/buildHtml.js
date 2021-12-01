@@ -3,11 +3,12 @@ function buildLoginHtml() {
 
 
     return `
-    <div>
+    <div class="login-screen">
     <h1>Login via Google</h1>
     <button id="googleLogin">
     <img src="./images/btn_google_signin_dark_normal_web@2x.png" alt="Google Logo" style="width: 250px;">
     </button>
+    <h2>With Loggin in you accept the <a target="_blank" href="../privacy.html">Privacy Policy</a> and <a target="_blank" href="../terms.html">Terms of Service</a></h2>
     </div>
 
    
