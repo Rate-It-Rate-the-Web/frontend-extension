@@ -1,0 +1,30 @@
+{
+    "name": "Rate It!",
+    "description": "Rate and discuss every Website you can find.",
+    "version": "1.0",
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "manifest_version": 2,
+    "permissions": ["storage", "activeTab", "tabs", "identity", "https://rateit.timon-gaertner.ga/*"],
+    "content_scripts": [{
+        "matches": ["https://www.youtube.com/watch*"],
+        "js": ["jquery.js", "content_script_incection_rateIt.js", "youtubeVideo.js"],
+        "run_at": "document_idle"
+    }],
+    "browser_action": {
+        "default_popup": "extension-popup/index.html",
+        "default_icon": {
+            "16": "/logos/rateItLogo16.png",
+            "32": "/logos/rateItLogo32.png",
+            "48": "/logos/rateItLogo64.png",
+            "128": "/logos/rateItLogo128.png"
+        }
+    },
+    "icons": {
+        "16": "/logos/rateItLogo16.png",
+        "32": "/logos/rateItLogo32.png",
+        "48": "/logos/rateItLogo64.png",
+        "128": "/logos/rateItLogo128.png"
+    }
+}
