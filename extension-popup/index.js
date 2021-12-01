@@ -40,7 +40,7 @@ browser.storage.sync.get("loggedIn", async (loggedIn) => {
     if (loggedIn.loggedIn == undefined) {
         $("body .wrapper").html(buildLoginHtml());
         $("#googleLogin").click(function () {
-            chrome.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
+            browser.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
                 if (response == "success") {
                     $("body .wrapper").html(buildIndexHtml());
                     getAndFillRating();
@@ -58,7 +58,7 @@ browser.storage.sync.get("loggedIn", async (loggedIn) => {
     } else if (loggedIn.loggedIn == false) {
         $("body .wrapper").html(buildLoginHtml());
         $("#googleLogin").click(function () {
-            chrome.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
+            browser.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
                 if (response == "success") {
                     $("body .wrapper").html(buildIndexHtml());
                     getAndFillRating();
@@ -74,7 +74,7 @@ browser.storage.sync.get("loggedIn", async (loggedIn) => {
             console.log("login");
         });
     } else if (loggedIn.loggedIn == "inProgress") {
-        chrome.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
+        browser.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
             if (response == "success") {
                 $("body .wrapper").html(buildIndexHtml());
                 getAndFillRating();
