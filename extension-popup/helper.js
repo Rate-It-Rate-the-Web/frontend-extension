@@ -22,7 +22,7 @@ function sendRating(rating) {
         data: JSON.stringify({ url: currentUrl, rating: rating }),
         error: function (xhr) {
             
-            .storage.sync.remove("loggedIn");
+            browser.storage.sync.remove("loggedIn");
             $("body .wrapper").html(buildLoginHtml());
             $("#googleLogin").click(function () {
                 browser.runtime.sendMessage(
