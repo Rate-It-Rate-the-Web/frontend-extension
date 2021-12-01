@@ -21,10 +21,11 @@ function sendRating(rating) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ url: currentUrl, rating: rating }),
         error: function (xhr) {
-            chrome.storage.sync.remove("loggedIn");
+            
+            .storage.sync.remove("loggedIn");
             $("body .wrapper").html(buildLoginHtml());
             $("#googleLogin").click(function () {
-                chrome.runtime.sendMessage(
+                browser.runtime.sendMessage(
                     { action: "oauthLogin" },
                     function (response) {
                         if (response == "success") {
