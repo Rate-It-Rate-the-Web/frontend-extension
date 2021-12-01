@@ -10,7 +10,8 @@
     "host_permissions": ["https://rateit.timon-gaertner.ga/"],
     "content_scripts": [{
         "matches": ["https://www.youtube.com/watch*"],
-        "js": ["jquery.js", "content_script_incection_rateIt.js", "youtubeVideo.js"]
+        "js": ["jquery.js", "content_script_incection_rateIt.js", "youtubeVideo.js"],
+        "run_at": "document_idle"
     }],
     "action": {
         "default_popup": "extension-popup/index.html",
