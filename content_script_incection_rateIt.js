@@ -2,7 +2,8 @@ let currentUrl = (window.location.protocol + "//" + window.location.host + windo
 const server = "https://rateit.timon-gaertner.ga/"
 let liked = false;
 let disliked = false;
-
+let htmlLikeSel;
+let htmlDislikeSel;
 function sendRating(rating) {
     chrome.runtime.sendMessage({action: "sendRating", url: currentUrl, rating: rating});
 }
@@ -23,6 +24,7 @@ async function fillDislikes(htmlDislikeSelector) {
     } else if (userRating == -1) {
         disliked = true;
     }
+    htmlDislikeSel=htmlDislikeSelector;
     htmlDislikeSelector.text(dislikes);
 }
 async function fillLikes(htmlLikeSelector) {
@@ -42,10 +44,18 @@ async function fillLikes(htmlLikeSelector) {
     } else if (userRating == -1) {
         disliked = true;
     }
+    htmlLikeSel=htmlLikeSelector;
     htmlLikeSelector.text(likes);
 }
 
-
+function fillLikesHtml(){
+    try{htmlLikeSel.text(likes);}
+    catch(err){}
+}
+function fillDislikesHtml(){
+    try{htmlDislikeSel.text(dislikes);}
+    catch(err){}
+}
 
 
 
@@ -53,17 +63,29 @@ async function fillLikes(htmlLikeSelector) {
 
 function assignDislikeButton(htmlLikeSelector) {
     htmlLikeSelector.click(function () {
-        if (disliked) {sendRating(0); liked=false;}
+        if (disliked) {sendRating(0); disliked=false; dislikes--; fillDislikesHtml()}
         else{
+        if (liked){
+            likes--;
+            fillLikesHtml();
+        }
         disliked=true;
         sendRating(-1);
+        dislikes++
+        fillDislikesHtml();
     }
 })}
 function assignLikeButton(htmlDislikeSelector) {
     htmlDislikeSelector.click(function () {
-        if (liked) {sendRating(0); liked=false;}
+        if (liked) {sendRating(0); liked=false; likes--; fillLikesHtml()}
         else{
+        if (disliked){
+            dislikes--;
+            fillDislikesHtml
+        }
         liked=true;
         sendRating(1);
+        likes++
+        fillLikesHtml();
     }
 })}
