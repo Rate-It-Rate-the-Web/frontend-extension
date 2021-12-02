@@ -68,6 +68,7 @@ function assignDislikeButton(htmlLikeSelector) {
         if (liked){
             likes--;
             fillLikesHtml();
+            liked = false;
         }
         disliked=true;
         sendRating(-1);
@@ -82,6 +83,7 @@ function assignLikeButton(htmlDislikeSelector) {
         if (disliked){
             dislikes--;
             fillDislikesHtml
+            disliked = false;
         }
         liked=true;
         sendRating(1);
