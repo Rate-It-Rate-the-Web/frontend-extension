@@ -55,6 +55,7 @@ function assignDislikeButton(htmlLikeSelector) {
     htmlLikeSelector.click(function () {
         if (disliked) {sendRating(0); liked=false;}
         else{
+        disliked=true;
         sendRating(-1);
     }
 })}
@@ -62,6 +63,7 @@ function assignLikeButton(htmlDislikeSelector) {
     htmlDislikeSelector.click(function () {
         if (liked) {sendRating(0); liked=false;}
         else{
+        liked=true;
         sendRating(1);
     }
 })}
