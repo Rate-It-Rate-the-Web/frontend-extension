@@ -82,7 +82,7 @@ function assignLikeButton(htmlDislikeSelector) {
         else{
         if (disliked){
             dislikes--;
-            fillDislikesHtml
+            fillDislikesHtml();
             disliked = false;
         }
         liked=true;
