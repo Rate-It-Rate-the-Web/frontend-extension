@@ -1,14 +1,14 @@
 {
     "name": "Rate It!",
     "description": "Rate and discuss every Website you can find.",
-    "version": "1.0",
+    "version": "1.2",
     "background": {
         "scripts": ["background.js"]
     },
     "manifest_version": 2,
     "permissions": ["storage", "activeTab", "tabs", "identity", "https://rateit.timon-gaertner.ga/*"],
     "content_scripts": [{
-        "matches": ["https://rateit.timon-gaertner.ga/*"],
+        "matches": ["https://www.youtube.com/watch?v=*"],
         "js": ["jquery.js", "content_script_incection_rateIt.js", "youtubeVideo.js"],
         "run_at": "document_idle"
     }],
