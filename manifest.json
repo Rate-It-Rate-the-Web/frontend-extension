@@ -6,7 +6,7 @@
         "service_worker": "background.js"
     },
     "manifest_version": 3,
-    "permissions": ["storage", "activeTab", "scripting", "tabs", "identity"],
+    "permissions": ["storage", "tabs", "identity"],
     "host_permissions": ["https://rateit.timon-gaertner.ga/"],
     "content_scripts": [{
         "matches": ["https://www.youtube.com/*"],
