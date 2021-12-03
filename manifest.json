@@ -1,7 +1,7 @@
 {
     "name": "Rate It!",
     "description": "Rate and discuss every Website you can find.",
-    "version": "1.4",
+    "version": "1.5",
     "background": {
         "scripts": ["background.js"]
     },
