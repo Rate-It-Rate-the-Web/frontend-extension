@@ -63,12 +63,21 @@ async function setupYoutubeVideo() {
 const setup = () => setInterval(setupYoutubeVideo, 300);
 
 function checkWatchUrl() {
-    if (location.pathname.startsWith('/watch')) {
-        setup();
+    if (
+        (
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            window.location.search
+        ).toLowerCase() != currentUrl
+    ) {
+        if (location.pathname.startsWith("/watch")) {
+            setup();
+        }
     }
 }
 checkWatchUrl();
-
 
 // checks if user loads new page (needed bc youtube changes sites with replacing history state )
 document.addEventListener("yt-navigate-start", checkWatchUrl);
