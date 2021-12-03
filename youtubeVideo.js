@@ -1,4 +1,5 @@
 async function setupYoutubeVideo() {
+    await getRating();
     if (
         !(
             $("ytd-toggle-button-renderer a yt-formatted-string")
@@ -23,7 +24,7 @@ async function setupYoutubeVideo() {
     } else {
         return false;
     }
-    clearInterval(setup);
+    clearInterval(interval);
     youtubeLiked = $(
         "#top-level-buttons-computed ytd-toggle-button-renderer a yt-icon-button"
     )
@@ -60,25 +61,17 @@ async function setupYoutubeVideo() {
         $("#top-level-buttons-computed ytd-toggle-button-renderer").eq(0)
     );
 }
-const setup = () => setInterval(setupYoutubeVideo, 300);
+interval = undefined
+const setup = () => interval = setInterval(setupYoutubeVideo, 300);
 
 function checkWatchUrl() {
-    if (
-        (
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            window.location.pathname +
-            window.location.search
-        ).toLowerCase() != currentUrl
-    ) {
         if (location.pathname.startsWith("/watch")) {
             setup();
         }
-    }
 }
 checkWatchUrl();
 
+const pageLoad = () => {contentScriptReload(); checkWatchUrl()};
 // checks if user loads new page (needed bc youtube changes sites with replacing history state )
-document.addEventListener("yt-navigate-start", checkWatchUrl);
-//document.addEventListener('DOMContentLoaded', checkWatchUrl);
+//document.addEventListener("yt-navigate-start", pageLoad);
+document.addEventListener('yt-navigate-finish', pageLoad);
