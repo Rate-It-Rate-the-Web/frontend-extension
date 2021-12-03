@@ -3,17 +3,16 @@
     "description": "Rate and discuss every Website you can find.",
     "version": "1.4",
     "background": {
-        "service_worker": "background.js"
+        "scripts": ["background.js"]
     },
-    "manifest_version": 3,
-    "permissions": ["storage", "activeTab", "scripting", "tabs", "identity"],
-    "host_permissions": ["https://rateit.timon-gaertner.ga/"],
+    "manifest_version": 2,
+    "permissions": ["storage", "activeTab", "tabs", "identity", "https://rateit.timon-gaertner.ga/*"],
     "content_scripts": [{
         "matches": ["https://www.youtube.com/*"],
         "js": ["jquery.js", "content_script_incection_rateIt.js", "youtubeVideo.js"],
         "run_at": "document_idle"
     }],
-    "action": {
+    "browser_action": {
         "default_popup": "extension-popup/index.html",
         "default_icon": {
             "16": "/logos/rateItLogo16.png",

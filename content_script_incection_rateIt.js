@@ -25,7 +25,7 @@ function contentScriptReload() {
     htmlDislikeSel;
 }
 function sendRating(rating) {
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
         action: "sendRating",
         url: currentUrl,
         rating: rating,
