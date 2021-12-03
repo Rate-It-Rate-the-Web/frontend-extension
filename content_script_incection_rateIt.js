@@ -1,22 +1,46 @@
-let currentUrl = (window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search).toLowerCase();
-const server = "https://rateit.timon-gaertner.ga/"
+let currentUrl = (
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    window.location.pathname +
+    window.location.search
+).toLowerCase();
+const server = "https://rateit.timon-gaertner.ga/";
 let liked = false;
 let disliked = false;
 let htmlLikeSel;
 let htmlDislikeSel;
+function contentScriptReload() {
+    currentUrl = (
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname +
+        window.location.search
+    ).toLowerCase();
+    server = "https://rateit.timon-gaertner.ga/";
+    liked = false;
+    disliked = false;
+    htmlLikeSel;
+    htmlDislikeSel;
+}
 function sendRating(rating) {
-    browser.runtime.sendMessage({action: "sendRating", url: currentUrl, rating: rating});
+    browser.runtime.sendMessage({
+        action: "sendRating",
+        url: currentUrl,
+        rating: rating,
+    });
 }
 async function fillDislikes(htmlDislikeSelector) {
     rating = await $.ajax({
-        url: server+"get/rating",
+        url: server + "get/rating",
         type: "get",
         data: {
             url: currentUrl,
         },
         error: function (xhr) {},
-    })
-    dislikes = rating.dislikes
+    });
+    dislikes = rating.dislikes;
 
     userRating = rating.userRating;
     if (userRating == 1) {
@@ -24,19 +48,19 @@ async function fillDislikes(htmlDislikeSelector) {
     } else if (userRating == -1) {
         disliked = true;
     }
-    htmlDislikeSel=htmlDislikeSelector;
+    htmlDislikeSel = htmlDislikeSelector;
     htmlDislikeSelector.text(dislikes);
 }
 async function fillLikes(htmlLikeSelector) {
     rating = await $.ajax({
-        url: server+"get/rating",
+        url: server + "get/rating",
         type: "get",
         data: {
             url: currentUrl,
         },
         error: function (xhr) {},
-    })
-    likes = rating.likes
+    });
+    likes = rating.likes;
 
     userRating = rating.userRating;
     if (userRating == 1) {
@@ -44,50 +68,58 @@ async function fillLikes(htmlLikeSelector) {
     } else if (userRating == -1) {
         disliked = true;
     }
-    htmlLikeSel=htmlLikeSelector;
+    htmlLikeSel = htmlLikeSelector;
     htmlLikeSelector.text(likes);
 }
 
-function fillLikesHtml(){
-    try{htmlLikeSel.text(likes);}
-    catch(err){}
+function fillLikesHtml() {
+    try {
+        htmlLikeSel.text(likes);
+    } catch (err) {}
 }
-function fillDislikesHtml(){
-    try{htmlDislikeSel.text(dislikes);}
-    catch(err){}
+function fillDislikesHtml() {
+    try {
+        htmlDislikeSel.text(dislikes);
+    } catch (err) {}
 }
-
-
-
-
 
 function assignDislikeButton(htmlLikeSelector) {
     htmlLikeSelector.click(function () {
-        if (disliked) {sendRating(0); disliked=false; dislikes--; fillDislikesHtml()}
-        else{
-        if (liked){
-            likes--;
-            fillLikesHtml();
-            liked = false;
-        }
-        disliked=true;
-        sendRating(-1);
-        dislikes++
-        fillDislikesHtml();
-    }
-})}
-function assignLikeButton(htmlDislikeSelector) {
-    htmlDislikeSelector.click(function () {
-        if (liked) {sendRating(0); liked=false; likes--; fillLikesHtml()}
-        else{
-        if (disliked){
+        if (disliked) {
+            sendRating(0);
+            disliked = false;
             dislikes--;
             fillDislikesHtml();
-            disliked = false;
+        } else {
+            if (liked) {
+                likes--;
+                fillLikesHtml();
+                liked = false;
+            }
+            disliked = true;
+            sendRating(-1);
+            dislikes++;
+            fillDislikesHtml();
         }
-        liked=true;
-        sendRating(1);
-        likes++
-        fillLikesHtml();
-    }
-})}
+    });
+}
+function assignLikeButton(htmlDislikeSelector) {
+    htmlDislikeSelector.click(function () {
+        if (liked) {
+            sendRating(0);
+            liked = false;
+            likes--;
+            fillLikesHtml();
+        } else {
+            if (disliked) {
+                dislikes--;
+                fillDislikesHtml();
+                disliked = false;
+            }
+            liked = true;
+            sendRating(1);
+            likes++;
+            fillLikesHtml();
+        }
+    });
+}
