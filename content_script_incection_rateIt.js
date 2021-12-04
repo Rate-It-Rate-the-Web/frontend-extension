@@ -15,6 +15,8 @@ let htmlDislikeBtnSel;
 let rating;
 let dislikeBtnAssigned = false;
 let likeBtnAssigned = false;
+let ratingGotFromBack = false;
+let ratingRequestedFromBack = false;
 async function getRating() {
     if (rating == undefined) {
         try {
@@ -24,7 +26,9 @@ async function getRating() {
                 data: {
                     url: currentUrl,
                 },
-                error: function (xhr) {rating = "error";},
+                error: function (xhr) {
+                    rating = "error";
+                },
             });
             if (rating == undefined) {
                 rating = "error";
@@ -53,6 +57,8 @@ function contentScriptReload() {
     htmlLikeBtnSel = "";
     htmlDislikeBtnSel = "";
     rating = undefined;
+    ratingGotFromBack = false;
+    ratingRequestedFromBack = false;
 }
 function sendRating(rating) {
     chrome.runtime.sendMessage({
@@ -154,4 +160,32 @@ function removeAssignedLikeButton() {
     liked = false;
     htmlLikeBtnSel.unbind("click");
     likeBtnAssigned = false;
+}
+
+function getRatingFromBackground() {
+    if (!ratingRequestedFromBack) {
+        chrome.runtime.sendMessage({
+            action: "getRating",
+            url: currentUrl,
+        });
+        chrome.runtime.onMessage.addListener(function (
+            request,
+            sender,
+            sendResponse
+        ) {
+            if (request.action == "setRating") {
+                rating = request.rating;
+                if (rating != undefined) {
+                    if (rating.userRating == 1) {
+                        liked = true;
+                    } else if (rating.userRating == -1) {
+                        disliked = true;
+                    }
+                    dislikes = rating.dislikes;
+                    likes = rating.likes;
+                }
+                ratingGotFromBack = true;
+            }
+        });
+    }
 }
