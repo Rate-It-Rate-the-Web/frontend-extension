@@ -67,6 +67,15 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     else if (request.action == "sendRating"){
         sendRating(request.rating, request.url)
     }
+    else if (request.action == "getRating"){
+        let tabId = sender.tab.id;
+        fetch(server+"get/rating?url="+request.url).then((response) => {
+            response.json().then((rating) => {
+            //send Response back to content script tab
+            browser.tabs.sendMessage(tabId, {action: "setRating", rating: rating});
+            })
+            
+    })}
     sendResponse("success")
 });
 

@@ -1,5 +1,7 @@
 async function setupYoutubeVideo() {
-    await getRating();
+    getRatingFromBackground(); //comment out, if you want to get the rating from foreground (in firefox this would be possible)
+    //getRating();
+    if (!ratingGotFromBack){return false} //comment out, if you want to get the rating from foreground (in firefox this would be possible)
     if (
         !(
             $("ytd-toggle-button-renderer a yt-formatted-string")
@@ -69,7 +71,6 @@ function checkWatchUrl() {
             setup();
         }
 }
-checkWatchUrl();
 
 const pageLoad = () => {contentScriptReload(); checkWatchUrl()};
 // checks if user loads new page (needed bc youtube changes sites with replacing history state )
