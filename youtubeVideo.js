@@ -71,7 +71,6 @@ function checkWatchUrl() {
             setup();
         }
 }
-checkWatchUrl();
 
 const pageLoad = () => {contentScriptReload(); checkWatchUrl()};
 // checks if user loads new page (needed bc youtube changes sites with replacing history state )
