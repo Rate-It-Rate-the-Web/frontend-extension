@@ -72,7 +72,7 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         fetch(server+"get/rating?url="+request.url).then((response) => {
             response.json().then((rating) => {
             //send Response back to content script tab
-            chrome.tabs.sendMessage(tabId, {action: "setRating", rating: rating});
+            browser.tabs.sendMessage(tabId, {action: "setRating", rating: rating});
             })
             
     })}
