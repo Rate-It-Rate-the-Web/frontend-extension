@@ -164,11 +164,11 @@ function removeAssignedLikeButton() {
 
 function getRatingFromBackground() {
     if (!ratingRequestedFromBack) {
-        chrome.runtime.sendMessage({
+        browser.runtime.sendMessage({
             action: "getRating",
             url: currentUrl,
         });
-        chrome.runtime.onMessage.addListener(function (
+        browser.runtime.onMessage.addListener(function (
             request,
             sender,
             sendResponse
