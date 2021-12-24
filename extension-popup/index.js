@@ -1,6 +1,6 @@
 const server = "https://rateit.timon-gaertner.ga/";
 let currentUrl = "";
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   currentUrl = tabs[0].url;
 });
 let likes = 0;
@@ -17,7 +17,7 @@ $("#dislikeButton").click(function () {
 });
 
 async function getAndFillRating() {
-    currentUrl = await chrome.tabs.query(
+    currentUrl = await browser.tabs.query(
         { active: true, currentWindow: true }
     );
     currentUrl = currentUrl[0].url;
@@ -36,11 +36,11 @@ async function getAndFillRating() {
     fillDislikeCount();
 }
 getAndFillRating();
-chrome.storage.sync.get("loggedIn", async (loggedIn) => {
+browser.storage.sync.get("loggedIn", async (loggedIn) => {
     if (loggedIn.loggedIn == undefined) {
         $("body .wrapper").html(buildLoginHtml());
         $("#googleLogin").click(function () {
-            chrome.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
+            browser.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
                 if (response == "success") {
                     $("body .wrapper").html(buildIndexHtml());
                     getAndFillRating();
@@ -58,7 +58,7 @@ chrome.storage.sync.get("loggedIn", async (loggedIn) => {
     } else if (loggedIn.loggedIn == false) {
         $("body .wrapper").html(buildLoginHtml());
         $("#googleLogin").click(function () {
-            chrome.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
+            browser.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
                 if (response == "success") {
                     $("body .wrapper").html(buildIndexHtml());
                     getAndFillRating();
@@ -74,7 +74,7 @@ chrome.storage.sync.get("loggedIn", async (loggedIn) => {
             console.log("login");
         });
     } else if (loggedIn.loggedIn == "inProgress") {
-        chrome.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
+        browser.runtime.sendMessage({ action: "oauthLogin" }, function (response) {
             if (response == "success") {
                 $("body .wrapper").html(buildIndexHtml());
                 getAndFillRating();

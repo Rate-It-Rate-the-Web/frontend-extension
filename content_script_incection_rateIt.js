@@ -61,7 +61,7 @@ function contentScriptReload() {
     ratingRequestedFromBack = false;
 }
 function sendRating(rating) {
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
         action: "sendRating",
         url: currentUrl,
         rating: rating,
