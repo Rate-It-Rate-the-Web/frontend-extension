@@ -13,12 +13,12 @@ async function setupYoutubeVideo() {
         )
     ) {
         await fillDislikes(
-            $("ytd-toggle-button-renderer a yt-formatted-string").eq(1)
+            $("ytd-toggle-button-renderer a yt-formatted-string").eq(-1)
         );
     } else {
         return false;
     }
-    likes = $("ytd-toggle-button-renderer a yt-formatted-string").eq(0);
+    likes = $("ytd-toggle-button-renderer a yt-formatted-string").eq(-2);
     if (!(likes.text() == "" || likes.text() == undefined)) {
         if (!/\d/.test(likes.text())) {
             await fillLikes(likes);
