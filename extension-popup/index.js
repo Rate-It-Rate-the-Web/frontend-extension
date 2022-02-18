@@ -1,4 +1,4 @@
-const server = "https://rateit.timon-gaertner.ga/";
+const server = "http://127.0.0.1:5000/";
 let currentUrl = "";
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   currentUrl = tabs[0].url;

@@ -5,7 +5,7 @@ let currentUrl = (
     window.location.pathname +
     window.location.search
 ).toLowerCase();
-const server = "https://rateit.timon-gaertner.ga/";
+const server = "http://127.0.0.1:5000/";
 let liked = false;
 let disliked = false;
 let htmlLikeSel;
