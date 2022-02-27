@@ -1,7 +1,4 @@
 function buildLoginHtml() {
-    
-
-
     return `
     <div class="login-screen">
     <h1>Login via Google</h1>
@@ -15,7 +12,6 @@ function buildLoginHtml() {
 
     `;
 }
-
 
 function buildIndexHtml() {
     return `
@@ -44,4 +40,47 @@ function buildIndexHtml() {
             </div>
         </div>
         `;
+}
+
+function buildAnswerHtml(answer) {
+    if (answer == undefined) {
+        return;
+    }
+    return `
+    <div id="${answer.id}" class="answer">
+        <h3 class="username">${answer.username}</h3>
+        <p class="commentText">
+            ${answer.comment}
+        </p>
+    </div>`;
+}
+function buildCommentHtml(comment) {
+    return `
+    <div id="${comment.id}" class="comment">
+                        <h3 class="username">${comment.username}</h3>
+                        <p class="commentText">
+                            ${comment.content}
+                        </p>
+                        ${
+                            comment.answer!=undefined && comment.answers.length > 0
+                                ? `
+                        <button class="openAnswers">
+                            Answers <img src="images/arrowDown.svg" alt="" />
+                        </button>
+                        `
+                                : ``
+                        }
+                        <div class="answers">
+                            ${
+                                comment.answer!=undefined && comment.answers.length > 0
+                                    ? comment.answers
+                                          .map((answer) =>
+                                              buildAnswerHtml(answer)
+                                          )
+                                          .join("")
+                                    : ``
+                            }
+                            
+                        </div>
+                    </div>`;
 }

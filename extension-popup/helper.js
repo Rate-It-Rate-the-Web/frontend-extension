@@ -29,7 +29,7 @@ function sendRating(rating) {
                     function (response) {
                         if (response == "success") {
                             $("body .wrapper").html(buildIndexHtml());
-                            getAndFillRating();
+                            getAndFillRatingAndComments();
                             $("#likeButton").click(function () {
                                 onLike();
                             });
@@ -97,6 +97,35 @@ function onDislike() {
         $("#dislike .filledActive").removeClass("filledActive");
         dislikes--;
         fillDislikeCount();
+    }
+}
+
+async function getComments(url, from, to) {
+    return await $.ajax({
+        url: server + "get/comments",
+        type: "get",
+        data: {
+            url: url,
+            indexFrom: from,
+            indexTo: to,
+        },
+        error: function (xhr) {},
+    });
+}
+
+async function postComment(comment) {
+    return await $.ajax({
+        url: server + "post/comment",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ url: currentUrl, comment: comment }),
+        error: function (xhr) {},
+    });
+}
+function fillComments(){
+    const commentHtml = $(".comments");
+    for (i of comments){
+        commentHtml.append(buildCommentHtml(i));
     }
 }
 
